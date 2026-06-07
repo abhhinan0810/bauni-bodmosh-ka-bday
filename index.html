@@ -22,46 +22,32 @@
     inset: 0;
   }
 
-  /* THE BACKGROUND — sits behind everything, has the orange corner glows */
   body {
-    font-family: 'Arial Black', Arial, sans-serif;
-    /* Orange glows in all 4 corners, dark black center */
+    font-family: Arial, sans-serif;
+    /* Dark background with subtle corner glows like image 2 */
     background:
-      radial-gradient(ellipse 70% 50% at 0% 0%,    rgba(210,100,0,0.90) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 100% 0%,  rgba(210,100,0,0.85) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 100% 100%, rgba(210,100,0,0.88) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 0% 100%,  rgba(210,100,0,0.85) 0%, transparent 55%),
-      #000;
+      radial-gradient(ellipse 55% 45% at 0% 0%,    rgba(120,55,0,0.75) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 100% 0%,  rgba(120,55,0,0.70) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 100% 100%, rgba(120,55,0,0.72) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 0% 100%,  rgba(120,55,0,0.70) 0%, transparent 60%),
+      #111;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* Card — transparent background so body glows show through */
+  /* Centered black card — exactly like image 2 */
   .card {
     position: relative;
     z-index: 10;
-    background: transparent;
-    width: 100%;
-    height: 100dvh;
+    background: #000;
+    width: 88%;
+    max-width: 520px;
+    border-radius: 10px;
+    padding: 24px 22px 24px 22px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: clamp(20px, 5vw, 36px) clamp(18px, 5vw, 32px);
-    overflow: hidden;
-  }
-
-  /* On wider screens: centered card with its own black bg */
-  @media (min-width: 520px) {
-    .card {
-      width: 90%;
-      max-width: 500px;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid #222;
-      background: #000;
-      box-shadow: 0 0 80px rgba(0,0,0,0.95);
-    }
+    gap: 0;
   }
 
   /* Language button */
@@ -69,25 +55,26 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #1a1a1a;
+    background: #1c1c1c;
     border: 1.5px solid #555;
     border-radius: 6px;
     color: #ccc;
-    font-size: clamp(12px, 3.2vw, 14px);
+    font-size: 13px;
     font-family: Arial, sans-serif;
     font-weight: 600;
-    padding: 7px 14px;
+    padding: 6px 13px;
     cursor: pointer;
-    margin-bottom: clamp(16px, 4vw, 24px);
+    margin-bottom: 18px;
     align-self: flex-start;
   }
 
   /* Logo */
   .logo {
     text-align: center;
-    margin-bottom: clamp(10px, 2.5vw, 14px);
-    font-size: clamp(34px, 10vw, 50px);
+    margin-bottom: 12px;
+    font-size: 42px;
     font-weight: 900;
+    font-family: 'Arial Black', Arial, sans-serif;
     letter-spacing: -1px;
     line-height: 1;
   }
@@ -97,9 +84,9 @@
   .logo .hub-wrap {
     display: inline-block;
     background: #ff9900;
-    border-radius: 8px;
+    border-radius: 7px;
     padding: 2px 10px 4px 10px;
-    margin-left: 3px;
+    margin-left: 2px;
   }
 
   .logo .hub { color: #000; }
@@ -108,37 +95,41 @@
   .heading {
     text-align: center;
     color: #fff;
-    font-size: clamp(19px, 5.5vw, 28px);
+    font-size: 22px;
     font-weight: 900;
-    margin-bottom: clamp(12px, 3.5vw, 18px);
+    font-family: 'Arial Black', Arial, sans-serif;
+    margin-bottom: 16px;
   }
 
-  /* Notice box */
+  /* Notice box — narrow, centered, orange border, dark bg */
   .notice-box {
-    border: 2.5px solid #ff9900;
-    border-radius: 10px;
+    border: 2px solid #ff9900;
+    border-radius: 8px;
     background: #111;
-    padding: clamp(14px, 3.5vw, 18px) 20px;
-    margin-bottom: clamp(12px, 3.5vw, 18px);
+    padding: 14px 20px;
+    margin-bottom: 18px;
     text-align: center;
+    /* Narrower than full width like image 2 */
+    width: 75%;
+    align-self: center;
   }
 
   .notice-title {
     color: #fff;
-    font-size: clamp(15px, 4.2vw, 19px);
+    font-size: 16px;
     font-weight: 900;
-    letter-spacing: 0.2px;
+    font-family: 'Arial Black', Arial, sans-serif;
   }
 
   /* Body text */
   .notice-text {
     color: #ccc;
-    font-size: clamp(14px, 4vw, 17px);
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.75;
     text-align: center;
     font-family: Arial, sans-serif;
     font-weight: 400;
-    margin-bottom: clamp(10px, 3vw, 16px);
+    margin-bottom: 14px;
   }
 
   /* Orange question */
@@ -146,8 +137,8 @@
     color: #ff9900;
     font-weight: 700;
     text-align: center;
-    font-size: clamp(15px, 4.2vw, 18px);
-    margin-bottom: clamp(14px, 4vw, 22px);
+    font-size: 16px;
+    margin-bottom: 18px;
     font-family: Arial, sans-serif;
   }
 
@@ -155,32 +146,33 @@
   .btn {
     display: block;
     width: 100%;
-    padding: clamp(15px, 4vw, 19px) 20px;
-    border-radius: 10px;
-    font-size: clamp(14px, 4vw, 17px);
+    padding: 17px 20px;
+    border-radius: 8px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     text-align: center;
-    border: 2.5px solid #ff9900;
-    background: #111;
+    border: 2px solid #ff9900;
+    background: #1a1a1a;
     color: #fff;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial Black', Arial, sans-serif;
     letter-spacing: 0.2px;
   }
 
   .btn-enter { margin-bottom: 12px; }
 
-  /* Placeholder — keeps card height stable */
+  /* Placeholder keeps card height stable when exit btn floats */
   .btn-placeholder {
     display: block;
     width: 100%;
     visibility: hidden;
     pointer-events: none;
-    border: 2.5px solid transparent;
-    border-radius: 10px;
-    font-size: clamp(14px, 4vw, 17px);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 17px 20px;
+    font-size: 15px;
     font-weight: 700;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial Black', Arial, sans-serif;
   }
 
   /* Floating exit button */
@@ -232,7 +224,7 @@
     Which contains 18+ content,<br>
     which was specifically made<br>
     for a bish living at Ulhasnagar,<br>
-    Mumbai. Click the "enter"<br>
+    Mumbai, Click the "enter"<br>
     button to continue, or you<br>
     can try clicking "no"<br>
     (I do recommend it)
