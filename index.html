@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornhub Prank</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+    background:#000;
+    overflow:hidden;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,140,0,.25), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(255,140,0,.20), transparent 30%),
+        radial-gradient(circle at 30% 80%, rgba(255,140,0,.20), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(255,140,0,.15), transparent 30%),
+        #111;
+    filter:blur(35px);
+    transform:scale(1.2);
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    background:#000;
+    border:2px solid #222;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    position:relative;
+    z-index:10;
+}
+
+.lang{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#444;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:5px;
+    font-size:14px;
+}
+
+.logo{
+    margin-top:45px;
+    font-size:clamp(38px,8vw,60px);
+    font-weight:bold;
+    color:#fff;
+}
+
+.logo span{
+    background:#ff9900;
+    color:#000;
+    padding:2px 8px;
+    border-radius:6px;
+}
+
+.heading{
+    margin-top:25px;
+    font-size:clamp(24px,5vw,42px);
+    color:white;
+    font-weight:bold;
+}
+
+.notice{
+    display:inline-block;
+    margin-top:20px;
+    border:4px solid #ff9900;
+    background:#333;
+    color:white;
+    padding:12px 22px;
+    border-radius:8px;
+    font-size:clamp(18px,4vw,28px);
+    font-weight:bold;
+}
+
+.text{
+    margin-top:25px;
+    color:#ddd;
+    font-size:clamp(16px,3.8vw,24px);
+    line-height:1.35;
+}
+
+.orange{
+    margin-top:25px;
+    color:#ff9900;
+    font-size:clamp(22px,4.5vw,34px);
+    font-weight:bold;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    width:100%;
+    padding:18px;
+    margin:12px 0;
+    background:#333;
+    color:white;
+    border:4px solid #ff9900;
+    border-radius:12px;
+    font-size:clamp(18px,4vw,28px);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Keeps space reserved */
+.exit-placeholder{
+    width:100%;
+    height:86px;
+    margin-top:12px;
+}
+
+/* Exit button fixed width */
+#exitBtn{
+    width:calc(100% - 40px);
+    max-width:460px;
+}
+
+/* 19 page */
+
+#nineteenPage{
+    position:fixed;
+    inset:0;
+    background:black;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+#nineteenPage h1{
+    color:#ff9900;
+    font-size:min(90vw,90vh);
+    font-weight:900;
+    line-height:1;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <button class="lang">🌐 English ▼</button>
+
+    <div class="logo">
+        Corn<span>hub</span>
+    </div>
+
+    <div class="heading">
+        This is an adult website
+    </div>
+
+    <div class="notice">
+        Notice to Users
+    </div>
+
+    <div class="text">
+        This is an adult 18+ website,<br>
+        Which contains 18+ content,<br>
+        which was specifically made<br>
+        for a bish living at Ulhasnagar,<br>
+        Mumbai. Click the "enter"<br>
+        button to continue, or you<br>
+        can try clicking "no"<br>
+        (I do recommend it)
+    </div>
+
+    <div class="orange">
+        Ready to see something 18+?
+    </div>
+
+    <div class="buttons">
+
+        <button class="btn">
+            I am 18 or older - Enter
+        </button>
+
+        <div class="exit-placeholder"></div>
+
+    </div>
+</div>
+
+<button class="btn" id="exitBtn">
+    I am under 18 - Exit
+</button>
+
+<div id="nineteenPage">
+    <h1>19</h1>
+</div>
+
+<script>
+const exitBtn = document.getElementById("exitBtn");
+const page19 = document.getElementById("nineteenPage");
+
+let escaped = false;
+
+/* Save original position */
+window.addEventListener("load", () => {
+
+    const placeholder =
+        document.querySelector(".exit-placeholder");
+
+    const rect =
+        placeholder.getBoundingClientRect();
+
+    exitBtn.style.position = "fixed";
+    exitBtn.style.left = rect.left + "px";
+    exitBtn.style.top = rect.top + "px";
+});
+
+/* Move button */
+
+function moveButton(){
+
+    escaped = true;
+
+    const rect = exitBtn.getBoundingClientRect();
+
+    const maxX =
+        window.innerWidth - rect.width - 10;
+
+    const maxY =
+        window.innerHeight - rect.height - 10;
+
+    exitBtn.style.left =
+        Math.random() * maxX + "px";
+
+    exitBtn.style.top =
+        Math.random() * maxY + "px";
+}
+
+/* Desktop */
+exitBtn.addEventListener(
+    "mouseenter",
+    moveButton
+);
+
+/* Mobile */
+exitBtn.addEventListener(
+    "touchstart",
+    function(e){
+        e.preventDefault();
+        moveButton();
+    }
+);
+
+/* If they somehow click it */
+exitBtn.addEventListener(
+    "click",
+    () => {
+        page19.style.display = "flex";
+    }
+);
+</script>
+
+</body>
+</html>
