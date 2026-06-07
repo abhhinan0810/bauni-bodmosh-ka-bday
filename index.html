@@ -22,39 +22,26 @@
     inset: 0;
   }
 
+  /* THE BACKGROUND — sits behind everything, has the orange corner glows */
   body {
     font-family: 'Arial Black', Arial, sans-serif;
-    background: #000;
+    /* Orange glows in all 4 corners, dark black center */
+    background:
+      radial-gradient(ellipse 70% 50% at 0% 0%,    rgba(210,100,0,0.90) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 100% 0%,  rgba(210,100,0,0.85) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 100% 100%, rgba(210,100,0,0.88) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 0% 100%,  rgba(210,100,0,0.85) 0%, transparent 55%),
+      #000;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* Background glow */
-  .bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 65% 45% at 0% 0%,    rgba(210,105,0,0.85) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 100% 0%,  rgba(210,105,0,0.80) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 100% 100%, rgba(210,105,0,0.82) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 0% 100%,  rgba(210,105,0,0.80) 0%, transparent 58%);
-    filter: blur(22px);
-  }
-
-  /* Card — full screen on mobile */
+  /* Card — transparent background so body glows show through */
   .card {
     position: relative;
     z-index: 10;
-    background: #000;
+    background: transparent;
     width: 100%;
     height: 100dvh;
     display: flex;
@@ -64,7 +51,7 @@
     overflow: hidden;
   }
 
-  /* On wider screens, show as a centered card */
+  /* On wider screens: centered card with its own black bg */
   @media (min-width: 520px) {
     .card {
       width: 90%;
@@ -72,6 +59,7 @@
       height: auto;
       border-radius: 12px;
       border: 1px solid #222;
+      background: #000;
       box-shadow: 0 0 80px rgba(0,0,0,0.95);
     }
   }
@@ -97,16 +85,14 @@
   /* Logo */
   .logo {
     text-align: center;
-    margin-bottom: clamp(10px, 3vw, 16px);
+    margin-bottom: clamp(10px, 2.5vw, 14px);
     font-size: clamp(34px, 10vw, 50px);
     font-weight: 900;
     letter-spacing: -1px;
     line-height: 1;
   }
 
-  .logo .corn {
-    color: #fff;
-  }
+  .logo .corn { color: #fff; }
 
   .logo .hub-wrap {
     display: inline-block;
@@ -116,9 +102,7 @@
     margin-left: 3px;
   }
 
-  .logo .hub {
-    color: #000;
-  }
+  .logo .hub { color: #000; }
 
   /* Heading */
   .heading {
@@ -126,7 +110,7 @@
     color: #fff;
     font-size: clamp(19px, 5.5vw, 28px);
     font-weight: 900;
-    margin-bottom: clamp(14px, 4vw, 20px);
+    margin-bottom: clamp(12px, 3.5vw, 18px);
   }
 
   /* Notice box */
@@ -135,7 +119,7 @@
     border-radius: 10px;
     background: #111;
     padding: clamp(14px, 3.5vw, 18px) 20px;
-    margin-bottom: clamp(14px, 4vw, 20px);
+    margin-bottom: clamp(12px, 3.5vw, 18px);
     text-align: center;
   }
 
@@ -154,7 +138,7 @@
     text-align: center;
     font-family: Arial, sans-serif;
     font-weight: 400;
-    margin-bottom: clamp(12px, 3.5vw, 18px);
+    margin-bottom: clamp(10px, 3vw, 16px);
   }
 
   /* Orange question */
@@ -163,7 +147,7 @@
     font-weight: 700;
     text-align: center;
     font-size: clamp(15px, 4.2vw, 18px);
-    margin-bottom: clamp(16px, 4.5vw, 24px);
+    margin-bottom: clamp(14px, 4vw, 22px);
     font-family: Arial, sans-serif;
   }
 
@@ -184,11 +168,9 @@
     letter-spacing: 0.2px;
   }
 
-  .btn-enter {
-    margin-bottom: 12px;
-  }
+  .btn-enter { margin-bottom: 12px; }
 
-  /* Placeholder — keeps card height stable when exit btn floats away */
+  /* Placeholder — keeps card height stable */
   .btn-placeholder {
     display: block;
     width: 100%;
@@ -199,7 +181,6 @@
     font-size: clamp(14px, 4vw, 17px);
     font-weight: 700;
     font-family: Arial, sans-serif;
-    /* height set by JS */
   }
 
   /* Floating exit button */
@@ -219,9 +200,7 @@
     justify-content: center;
   }
 
-  #page19.show {
-    display: flex;
-  }
+  #page19.show { display: flex; }
 
   #page19 span {
     color: #ff9900;
@@ -234,8 +213,6 @@
 </style>
 </head>
 <body>
-
-<div class="bg"></div>
 
 <div class="card" id="mainCard">
   <button class="lang-btn">🌐 English ▼</button>
@@ -291,8 +268,6 @@
       exitBtn.style.height = btnH + 'px';
       placeholder.style.height = btnH + 'px';
     }
-
-    lockDimensions();
 
     function placeInitial() {
       lockDimensions();
