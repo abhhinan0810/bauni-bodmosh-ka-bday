@@ -18,6 +18,8 @@
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    position: fixed;
+    inset: 0;
   }
 
   body {
@@ -26,17 +28,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    inset: 0;
   }
 
-  /* Glowing background */
+  /* Background glow */
   .bg {
     position: fixed;
     inset: 0;
     z-index: 0;
-    background: #000;
-    overflow: hidden;
+    pointer-events: none;
   }
 
   .bg::before {
@@ -44,38 +43,36 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 55% 45% at 0% 0%, rgba(255,140,0,0.55) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(255,140,0,0.45) 0%, transparent 58%),
-      radial-gradient(ellipse 45% 40% at 100% 100%, rgba(255,140,0,0.50) 0%, transparent 58%),
-      radial-gradient(ellipse 50% 42% at 0% 100%, rgba(255,140,0,0.42) 0%, transparent 58%);
-    filter: blur(30px);
+      radial-gradient(ellipse 65% 45% at 0% 0%,    rgba(210,105,0,0.85) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 100% 0%,  rgba(210,105,0,0.80) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 100% 100%, rgba(210,105,0,0.82) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 0% 100%,  rgba(210,105,0,0.80) 0%, transparent 58%);
+    filter: blur(22px);
   }
 
-  .bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.38);
-  }
-
-  /* Card — full width on mobile, max 500px on desktop */
+  /* Card — full screen on mobile */
   .card {
     position: relative;
     z-index: 10;
     background: #000;
     width: 100%;
-    max-width: 500px;
-    padding: clamp(18px, 5vw, 32px) clamp(18px, 5vw, 32px);
-    /* No border-radius on mobile, slight on desktop */
-    border-radius: 0;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(20px, 5vw, 36px) clamp(18px, 5vw, 32px);
+    overflow: hidden;
   }
 
+  /* On wider screens, show as a centered card */
   @media (min-width: 520px) {
     .card {
+      width: 90%;
+      max-width: 500px;
+      height: auto;
       border-radius: 12px;
       border: 1px solid #222;
       box-shadow: 0 0 80px rgba(0,0,0,0.95);
-      width: 90%;
     }
   }
 
@@ -85,22 +82,23 @@
     align-items: center;
     gap: 6px;
     background: #1a1a1a;
-    border: 1.5px solid #444;
+    border: 1.5px solid #555;
     border-radius: 6px;
     color: #ccc;
-    font-size: clamp(11px, 3vw, 13px);
+    font-size: clamp(12px, 3.2vw, 14px);
     font-family: Arial, sans-serif;
     font-weight: 600;
-    padding: 6px 14px;
+    padding: 7px 14px;
     cursor: pointer;
-    margin-bottom: clamp(14px, 4vw, 22px);
+    margin-bottom: clamp(16px, 4vw, 24px);
+    align-self: flex-start;
   }
 
   /* Logo */
   .logo {
     text-align: center;
     margin-bottom: clamp(10px, 3vw, 16px);
-    font-size: clamp(32px, 9vw, 48px);
+    font-size: clamp(34px, 10vw, 50px);
     font-weight: 900;
     letter-spacing: -1px;
     line-height: 1;
@@ -113,8 +111,8 @@
   .logo .hub-wrap {
     display: inline-block;
     background: #ff9900;
-    border-radius: 7px;
-    padding: 1px 10px 3px 10px;
+    border-radius: 8px;
+    padding: 2px 10px 4px 10px;
     margin-left: 3px;
   }
 
@@ -126,40 +124,37 @@
   .heading {
     text-align: center;
     color: #fff;
-    font-size: clamp(18px, 5.5vw, 26px);
+    font-size: clamp(19px, 5.5vw, 28px);
     font-weight: 900;
     margin-bottom: clamp(14px, 4vw, 20px);
-    letter-spacing: -0.2px;
   }
 
-  /* Notice box — styled like a button outline, just text inside */
+  /* Notice box */
   .notice-box {
     border: 2.5px solid #ff9900;
-    border-radius: 8px;
-    background: transparent;
-    padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+    border-radius: 10px;
+    background: #111;
+    padding: clamp(14px, 3.5vw, 18px) 20px;
     margin-bottom: clamp(14px, 4vw, 20px);
     text-align: center;
   }
 
   .notice-title {
     color: #fff;
-    font-size: clamp(14px, 4vw, 18px);
+    font-size: clamp(15px, 4.2vw, 19px);
     font-weight: 900;
-    text-align: center;
     letter-spacing: 0.2px;
   }
 
-  /* Body text — shown below the notice box */
+  /* Body text */
   .notice-text {
     color: #ccc;
-    font-size: clamp(13px, 3.8vw, 16px);
-    line-height: 1.65;
+    font-size: clamp(14px, 4vw, 17px);
+    line-height: 1.7;
     text-align: center;
     font-family: Arial, sans-serif;
     font-weight: 400;
     margin-bottom: clamp(12px, 3.5vw, 18px);
-    padding: 0 4px;
   }
 
   /* Orange question */
@@ -167,8 +162,8 @@
     color: #ff9900;
     font-weight: 700;
     text-align: center;
-    font-size: clamp(14px, 4vw, 17px);
-    margin-bottom: clamp(16px, 4vw, 22px);
+    font-size: clamp(15px, 4.2vw, 18px);
+    margin-bottom: clamp(16px, 4.5vw, 24px);
     font-family: Arial, sans-serif;
   }
 
@@ -176,14 +171,14 @@
   .btn {
     display: block;
     width: 100%;
-    padding: clamp(14px, 3.5vw, 18px) 20px;
-    border-radius: 8px;
-    font-size: clamp(13px, 3.8vw, 16px);
+    padding: clamp(15px, 4vw, 19px) 20px;
+    border-radius: 10px;
+    font-size: clamp(14px, 4vw, 17px);
     font-weight: 700;
     cursor: pointer;
     text-align: center;
     border: 2.5px solid #ff9900;
-    background: #1c1c1c;
+    background: #111;
     color: #fff;
     font-family: Arial, sans-serif;
     letter-spacing: 0.2px;
@@ -193,21 +188,21 @@
     margin-bottom: 12px;
   }
 
-  /* Placeholder keeps card height stable */
+  /* Placeholder — keeps card height stable when exit btn floats away */
   .btn-placeholder {
+    display: block;
     width: 100%;
     visibility: hidden;
     pointer-events: none;
     border: 2.5px solid transparent;
-    border-radius: 8px;
-    font-size: clamp(13px, 3.8vw, 16px);
+    border-radius: 10px;
+    font-size: clamp(14px, 4vw, 17px);
     font-weight: 700;
     font-family: Arial, sans-serif;
-    letter-spacing: 0.2px;
-    display: block;
+    /* height set by JS */
   }
 
-  /* Exit button floats over everything */
+  /* Floating exit button */
   #exitBtn {
     position: fixed;
     z-index: 9999;
@@ -230,7 +225,7 @@
 
   #page19 span {
     color: #ff9900;
-    font-size: clamp(160px, 38vw, 360px);
+    font-size: clamp(160px, 40vw, 380px);
     font-weight: 900;
     line-height: 1;
     font-family: 'Arial Black', Arial, sans-serif;
@@ -270,18 +265,15 @@
 
   <button class="btn btn-enter" id="enterBtn">I am 18 or older - Enter</button>
 
-  <!-- Invisible placeholder to hold card height -->
   <div class="btn-placeholder" id="placeholder">I am under 18 - Exit</div>
 </div>
 
-<!-- Floating exit button -->
 <button class="btn" id="exitBtn">I am under 18 - Exit</button>
 
-<!-- Fullscreen 19 page -->
 <div id="page19"><span>19</span></div>
 
 <script>
-(function() {
+(function () {
   const exitBtn = document.getElementById('exitBtn');
   const enterBtn = document.getElementById('enterBtn');
   const placeholder = document.getElementById('placeholder');
@@ -302,18 +294,15 @@
 
     lockDimensions();
 
-    window.addEventListener('resize', () => {
-      lockDimensions();
-      placeInitial();
-    });
-
     function placeInitial() {
+      lockDimensions();
       const phRect = placeholder.getBoundingClientRect();
       exitBtn.style.left = phRect.left + 'px';
       exitBtn.style.top = phRect.top + 'px';
     }
 
     placeInitial();
+    window.addEventListener('resize', placeInitial);
 
     function jumpAway(e) {
       if (e && e.cancelable) e.preventDefault();
@@ -325,37 +314,35 @@
       const maxX = vw - btnW - margin;
       const maxY = vh - btnH - margin;
 
-      let newX, newY, attempts = 0;
+      let newX, newY, tries = 0;
       do {
         newX = margin + Math.random() * (maxX - margin);
         newY = margin + Math.random() * (maxY - margin);
-        attempts++;
-      } while (attempts < 20 && isNearCard(newX, newY, btnW, btnH));
+        tries++;
+      } while (tries < 20 && overlapsCard(newX, newY));
 
       exitBtn.style.left = newX + 'px';
       exitBtn.style.top = newY + 'px';
     }
 
-    function isNearCard(x, y, w, h) {
-      const card = mainCard.getBoundingClientRect();
+    function overlapsCard(x, y) {
+      const c = mainCard.getBoundingClientRect();
       const pad = 20;
-      return !(x + w < card.left - pad ||
-               x > card.right + pad ||
-               y + h < card.top - pad ||
-               y > card.bottom + pad);
+      return !(x + btnW < c.left - pad || x > c.right + pad ||
+               y + btnH < c.top - pad || y > c.bottom + pad);
     }
 
     exitBtn.addEventListener('mouseenter', jumpAway);
     exitBtn.addEventListener('touchstart', jumpAway, { passive: false });
 
-    exitBtn.addEventListener('click', function(e) {
+    exitBtn.addEventListener('click', function (e) {
       e.preventDefault();
       mainCard.style.display = 'none';
       exitBtn.style.display = 'none';
       page19.classList.add('show');
     });
 
-    enterBtn.addEventListener('click', function() {
+    enterBtn.addEventListener('click', function () {
       alert('Gotcha 😂');
     });
   }
