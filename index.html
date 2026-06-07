@@ -2,279 +2,387 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cornhub Prank</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Age Verification</title>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px;
-    background:#000;
-    overflow:hidden;
-    position:relative;
-}
+  html, body {
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 
-body::before{
-    content:"";
-    position:absolute;
-    inset:0;
+  body {
+    font-family: 'Arial Black', Arial, sans-serif;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+  }
+
+  /* Glowing background */
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     background:
-        radial-gradient(circle at 20% 20%, rgba(255,140,0,.25), transparent 30%),
-        radial-gradient(circle at 80% 30%, rgba(255,140,0,.20), transparent 30%),
-        radial-gradient(circle at 30% 80%, rgba(255,140,0,.20), transparent 30%),
-        radial-gradient(circle at 90% 90%, rgba(255,140,0,.15), transparent 30%),
-        #111;
-    filter:blur(35px);
-    transform:scale(1.2);
-}
+      radial-gradient(ellipse 60% 40% at 5% 10%, rgba(255,153,0,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 35% at 95% 5%, rgba(255,153,0,0.28) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 30% at 90% 92%, rgba(255,153,0,0.32) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 40% at 8% 90%, rgba(255,153,0,0.25) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 25% at 50% 50%, rgba(30,20,0,0.8) 0%, transparent 70%);
+    filter: blur(18px);
+  }
 
-.container{
-    width:100%;
-    max-width:500px;
-    background:#000;
-    border:2px solid #222;
-    border-radius:15px;
-    padding:20px;
-    text-align:center;
-    position:relative;
-    z-index:10;
-}
+  .bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+  }
 
-.lang{
-    position:absolute;
-    top:15px;
-    left:15px;
-    background:#444;
-    color:#fff;
-    border:none;
-    padding:8px 12px;
-    border-radius:5px;
-    font-size:14px;
-}
+  /* Card */
+  .card {
+    position: relative;
+    z-index: 10;
+    background: #000;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    padding: clamp(16px, 4vw, 28px);
+    box-shadow: 0 0 60px rgba(0,0,0,0.9), 0 0 0 1px #1a1a1a;
+  }
 
-.logo{
-    margin-top:45px;
-    font-size:clamp(38px,8vw,60px);
-    font-weight:bold;
-    color:#fff;
-}
+  /* Language button */
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #aaa;
+    font-size: clamp(10px, 2.5vw, 12px);
+    padding: 4px 10px;
+    cursor: pointer;
+    margin-bottom: clamp(10px, 3vw, 16px);
+  }
 
-.logo span{
-    background:#ff9900;
-    color:#000;
-    padding:2px 8px;
-    border-radius:6px;
-}
+  /* Logo */
+  .logo {
+    text-align: center;
+    margin-bottom: clamp(10px, 3vw, 16px);
+    font-size: clamp(28px, 8vw, 44px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
 
-.heading{
-    margin-top:25px;
-    font-size:clamp(24px,5vw,42px);
-    color:white;
-    font-weight:bold;
-}
+  .logo .corn {
+    color: #fff;
+  }
 
-.notice{
-    display:inline-block;
-    margin-top:20px;
-    border:4px solid #ff9900;
-    background:#333;
-    color:white;
-    padding:12px 22px;
-    border-radius:8px;
-    font-size:clamp(18px,4vw,28px);
-    font-weight:bold;
-}
+  .logo .hub-wrap {
+    display: inline-block;
+    background: #ff9900;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-left: 2px;
+  }
 
-.text{
-    margin-top:25px;
-    color:#ddd;
-    font-size:clamp(16px,3.8vw,24px);
-    line-height:1.35;
-}
+  .logo .hub {
+    color: #000;
+  }
 
-.orange{
-    margin-top:25px;
-    color:#ff9900;
-    font-size:clamp(22px,4.5vw,34px);
-    font-weight:bold;
-}
+  /* Heading */
+  .heading {
+    text-align: center;
+    color: #fff;
+    font-size: clamp(14px, 3.5vw, 20px);
+    font-weight: 700;
+    margin-bottom: clamp(10px, 2.5vw, 14px);
+    letter-spacing: 0.3px;
+  }
 
-.buttons{
-    margin-top:30px;
-}
+  /* Notice box */
+  .notice-box {
+    background: #1a1a1a;
+    border: 1px solid #ff9900;
+    border-radius: 8px;
+    padding: clamp(10px, 2.5vw, 16px);
+    margin-bottom: clamp(10px, 2.5vw, 14px);
+  }
 
-.btn{
-    width:100%;
-    padding:18px;
-    margin:12px 0;
-    background:#333;
-    color:white;
-    border:4px solid #ff9900;
-    border-radius:12px;
-    font-size:clamp(18px,4vw,28px);
-    font-weight:bold;
-    cursor:pointer;
-}
+  .notice-title {
+    color: #ff9900;
+    font-size: clamp(11px, 2.5vw, 13px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
 
-/* Keeps space reserved */
-.exit-placeholder{
-    width:100%;
-    height:86px;
-    margin-top:12px;
-}
+  .notice-text {
+    color: #bbb;
+    font-size: clamp(11px, 2.8vw, 13px);
+    line-height: 1.6;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+  }
 
-/* Exit button fixed width */
-#exitBtn{
-    width:calc(100% - 40px);
-    max-width:460px;
-}
+  /* Orange question */
+  .question {
+    color: #ff9900;
+    font-weight: 700;
+    text-align: center;
+    font-size: clamp(12px, 3vw, 15px);
+    margin-bottom: clamp(10px, 2.5vw, 14px);
+  }
 
-/* 19 page */
+  /* Buttons */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: clamp(11px, 2.5vw, 14px) 20px;
+    border-radius: 8px;
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    border: 2px solid #ff9900;
+    background: #1c1c1c;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.3px;
+  }
 
-#nineteenPage{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-}
+  .btn:hover {
+    background: #252525;
+  }
 
-#nineteenPage h1{
-    color:#ff9900;
-    font-size:min(90vw,90vh);
-    font-weight:900;
-    line-height:1;
-}
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-enter {
+    margin-bottom: 10px;
+  }
+
+  /* Placeholder keeps card height stable */
+  .btn-placeholder {
+    width: 100%;
+    visibility: hidden;
+    pointer-events: none;
+    /* Height set by JS after measuring btn-exit */
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.3px;
+  }
+
+  /* Exit button floats over everything */
+  #exitBtn {
+    position: fixed;
+    z-index: 9999;
+    /* position set by JS */
+  }
+
+  /* Fullscreen 19 page */
+  #page19 {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #page19.show {
+    display: flex;
+  }
+
+  #page19 span {
+    color: #ff9900;
+    font-size: clamp(200px, 40vw, 380px);
+    font-weight: 900;
+    line-height: 1;
+    font-family: 'Arial Black', Arial, sans-serif;
+    letter-spacing: -10px;
+  }
 </style>
 </head>
 <body>
 
-<div class="container">
+<div class="bg"></div>
 
-    <button class="lang">🌐 English ▼</button>
+<div class="card" id="mainCard">
+  <button class="lang-btn">🌐 English ▼</button>
 
-    <div class="logo">
-        Corn<span>hub</span>
+  <div class="logo">
+    <span class="corn">Corn</span><span class="hub-wrap"><span class="hub">hub</span></span>
+  </div>
+
+  <div class="heading">This is an adult website</div>
+
+  <div class="notice-box">
+    <div class="notice-title">Notice to Users</div>
+    <div class="notice-text">
+      This is an adult 18+ website,<br>
+      Which contains 18+ content,<br>
+      which was specifically made<br>
+      for a bish living at Ulhasnagar,<br>
+      Mumbai. Click the "enter"<br>
+      button to continue, or you<br>
+      can try clicking "no"<br>
+      (I do recommend it)
     </div>
+  </div>
 
-    <div class="heading">
-        This is an adult website
-    </div>
+  <div class="question">Ready to see something 18+?</div>
 
-    <div class="notice">
-        Notice to Users
-    </div>
+  <button class="btn btn-enter" id="enterBtn">I am 18 or older - Enter</button>
 
-    <div class="text">
-        This is an adult 18+ website,<br>
-        Which contains 18+ content,<br>
-        which was specifically made<br>
-        for a bish living at Ulhasnagar,<br>
-        Mumbai. Click the "enter"<br>
-        button to continue, or you<br>
-        can try clicking "no"<br>
-        (I do recommend it)
-    </div>
-
-    <div class="orange">
-        Ready to see something 18+?
-    </div>
-
-    <div class="buttons">
-
-        <button class="btn">
-            I am 18 or older - Enter
-        </button>
-
-        <div class="exit-placeholder"></div>
-
-    </div>
+  <!-- Invisible placeholder to hold card height -->
+  <div class="btn-placeholder" id="placeholder">I am under 18 - Exit</div>
 </div>
 
-<button class="btn" id="exitBtn">
-    I am under 18 - Exit
-</button>
+<!-- Floating exit button -->
+<button class="btn" id="exitBtn">I am under 18 - Exit</button>
 
-<div id="nineteenPage">
-    <h1>19</h1>
-</div>
+<!-- Fullscreen 19 page -->
+<div id="page19"><span>19</span></div>
 
 <script>
-const exitBtn = document.getElementById("exitBtn");
-const page19 = document.getElementById("nineteenPage");
+(function() {
+  const exitBtn = document.getElementById('exitBtn');
+  const enterBtn = document.getElementById('enterBtn');
+  const placeholder = document.getElementById('placeholder');
+  const page19 = document.getElementById('page19');
+  const mainCard = document.getElementById('mainCard');
 
-let escaped = false;
+  // Wait for layout to stabilize
+  function init() {
+    // Measure placeholder to set its height
+    const ph = placeholder.getBoundingClientRect();
 
-/* Save original position */
-window.addEventListener("load", () => {
+    // Lock exit button dimensions
+    let btnW, btnH;
 
-    const placeholder =
-        document.querySelector(".exit-placeholder");
-
-    const rect =
-        placeholder.getBoundingClientRect();
-
-    exitBtn.style.position = "fixed";
-    exitBtn.style.left = rect.left + "px";
-    exitBtn.style.top = rect.top + "px";
-});
-
-/* Move button */
-
-function moveButton(){
-
-    escaped = true;
-
-    const rect = exitBtn.getBoundingClientRect();
-
-    const maxX =
-        window.innerWidth - rect.width - 10;
-
-    const maxY =
-        window.innerHeight - rect.height - 10;
-
-    exitBtn.style.left =
-        Math.random() * maxX + "px";
-
-    exitBtn.style.top =
-        Math.random() * maxY + "px";
-}
-
-/* Desktop */
-exitBtn.addEventListener(
-    "mouseenter",
-    moveButton
-);
-
-/* Mobile */
-exitBtn.addEventListener(
-    "touchstart",
-    function(e){
-        e.preventDefault();
-        moveButton();
+    function lockDimensions() {
+      // Measure from placeholder (same text, same classes)
+      const rect = placeholder.getBoundingClientRect();
+      btnW = rect.width;
+      btnH = rect.height;
+      exitBtn.style.width = btnW + 'px';
+      exitBtn.style.height = btnH + 'px';
+      placeholder.style.height = btnH + 'px';
+      placeholder.style.padding = window.getComputedStyle(exitBtn).padding;
     }
-);
 
-/* If they somehow click it */
-exitBtn.addEventListener(
-    "click",
-    () => {
-        page19.style.display = "flex";
+    lockDimensions();
+    window.addEventListener('resize', () => {
+      lockDimensions();
+      placeInitial();
+    });
+
+    // Place exit button in initial position (below card, where placeholder is)
+    function placeInitial() {
+      const cardRect = mainCard.getBoundingClientRect();
+      const phRect = placeholder.getBoundingClientRect();
+      exitBtn.style.left = phRect.left + 'px';
+      exitBtn.style.top = phRect.top + 'px';
     }
-);
+
+    placeInitial();
+
+    // Random jump logic
+    let isEscaped = false;
+
+    function jumpAway(e) {
+      if (e && e.cancelable) e.preventDefault();
+
+      lockDimensions();
+
+      const margin = 10;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const maxX = vw - btnW - margin;
+      const maxY = vh - btnH - margin;
+
+      let newX, newY;
+      let attempts = 0;
+
+      do {
+        newX = margin + Math.random() * (maxX - margin);
+        newY = margin + Math.random() * (maxY - margin);
+        attempts++;
+      } while (attempts < 20 && isNearCard(newX, newY, btnW, btnH));
+
+      exitBtn.style.left = newX + 'px';
+      exitBtn.style.top = newY + 'px';
+      isEscaped = true;
+    }
+
+    function isNearCard(x, y, w, h) {
+      const card = mainCard.getBoundingClientRect();
+      const pad = 20;
+      return !(x + w < card.left - pad ||
+               x > card.right + pad ||
+               y + h < card.top - pad ||
+               y > card.bottom + pad);
+    }
+
+    // Desktop: mouseenter
+    exitBtn.addEventListener('mouseenter', jumpAway);
+    // Mobile: touchstart
+    exitBtn.addEventListener('touchstart', jumpAway, { passive: false });
+
+    // If they somehow click it
+    exitBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      mainCard.style.display = 'none';
+      exitBtn.style.display = 'none';
+      page19.classList.add('show');
+    });
+
+    // Enter button
+    enterBtn.addEventListener('click', function() {
+      alert('Gotcha 😂');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // Small delay to ensure paint
+    requestAnimationFrame(() => requestAnimationFrame(init));
+  }
+})();
 </script>
-
 </body>
 </html>
