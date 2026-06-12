@@ -1,4 +1,5 @@
 (function () {
+
   const exitBtn = document.getElementById('exitBtn');
   const enterBtn = document.getElementById('enterBtn');
   const placeholder = document.getElementById('placeholder');
@@ -6,7 +7,12 @@
   const mainCard = document.getElementById('mainCard');
   const backBtn = document.getElementById('backBtn');
 
+  const videoPage = document.getElementById('videoPage');
+  const birthdayVideo = document.getElementById('birthdayVideo');
+  const finalPage = document.getElementById('finalPage');
+
   function init() {
+
     let btnW, btnH;
 
     function lockDimensions() {
@@ -47,6 +53,7 @@
     }
 
     function jumpAway(e) {
+
       if (e && e.cancelable) {
         e.preventDefault();
       }
@@ -75,6 +82,7 @@
     }
 
     // Exit button runs away
+
     exitBtn.addEventListener('mouseenter', jumpAway);
 
     exitBtn.addEventListener('touchstart', jumpAway, {
@@ -82,41 +90,75 @@
     });
 
     // If somehow clicked
+
     exitBtn.addEventListener('click', function (e) {
+
       e.preventDefault();
 
       mainCard.style.display = 'none';
       exitBtn.style.display = 'none';
 
       page19.classList.add('show');
+
     });
 
-    // Enter button → show 19 page
+    // Enter button → Birthday page
+
     enterBtn.addEventListener('click', function () {
+
       mainCard.style.display = 'none';
       exitBtn.style.display = 'none';
 
       page19.classList.add('show');
+
     });
 
-    // Go Back button
+    // Button on birthday page → Video page
+
     if (backBtn) {
+
       backBtn.addEventListener('click', function () {
+
         page19.classList.remove('show');
 
-        mainCard.style.display = 'flex';
-        exitBtn.style.display = 'block';
+        videoPage.style.display = 'block';
 
-        placeInitial();
+        birthdayVideo.currentTime = 0;
+
+        birthdayVideo.play().catch(err => {
+          console.log('Video autoplay blocked:', err);
+        });
+
       });
+
     }
+
+    // When video ends → Final page
+
+    if (birthdayVideo) {
+
+      birthdayVideo.addEventListener('ended', function () {
+
+        videoPage.style.display = 'none';
+
+        finalPage.classList.add('show');
+
+      });
+
+    }
+
   }
 
   if (document.readyState === 'loading') {
+
     document.addEventListener('DOMContentLoaded', init);
+
   } else {
+
     requestAnimationFrame(() => {
       requestAnimationFrame(init);
     });
+
   }
+
 })();
