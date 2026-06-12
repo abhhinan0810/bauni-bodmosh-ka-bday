@@ -442,7 +442,7 @@ body {
   width: 177.78%;
   height: 56.25%;
 
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform: translate(-50%, -50%);
 
   object-fit: contain;
   background: #000;
