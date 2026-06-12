@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Age Verification</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- PAGE 1 — Age Verification (unchanged) -->
 <div class="card" id="mainCard">
   <button class="lang-btn">🌐 English ▼</button>
 
@@ -46,44 +47,45 @@
 
 <button class="btn" id="exitBtn">I am under 18 - Exit</button>
 
+<!-- PAGE 2 — Birthday Reveal -->
 <div id="page19">
-
   <div class="birthday-container">
-  <div class="happy-text">Happy</div>
+    <div class="happy-text">Happy</div>
 
-  <div class="number-wrapper">
-    <div class="th-sup">th</div>
-    <div class="big-number">19</div>
+    <div class="number-wrapper">
+      <div class="th-sup">th</div>
+      <div class="big-number">19</div>
+    </div>
+
+    <div class="birthday-text">Birthday Bish</div>
   </div>
 
-  <div class="birthday-text">Birthday Bish</div>
-</div>
-
-<div class="bottom-section">
-  <div class="farewell-text">
-    (thats it bish, now stfu & use this button specifically to go away)
+  <div class="bottom-section">
+    <div class="farewell-text">
+      (thats it bish, now stfu &amp; use this button specifically to go away)
+    </div>
+    <button id="backBtn">Go Back</button>
   </div>
+</div>
 
-  <button id="backBtn">Go Back</button>
-</div>
-</div>
-<!-- Video Page -->
+<!-- PAGE 3 — Video Page -->
 <div id="videoPage">
-
+  <div id="petalContainer"></div>
   <div class="video-frame">
-
-    <video id="birthdayVideo" playsinline>
+    <video id="birthdayVideo" playsinline muted>
       <source src="bauni.mp4" type="video/mp4">
     </video>
-
   </div>
-
 </div>
 
-<!-- Final Page -->
+<!-- PAGE 4 — Final Birthday Message -->
 <div id="finalPage">
-  <h1>Happy Birthday 🎉</h1>
+  <div class="final-content">
+    <h1>Happy Birthday 🎉</h1>
+    <p class="final-sub">Hope you have an amazing year ahead ❤️</p>
+  </div>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
