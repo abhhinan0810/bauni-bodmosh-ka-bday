@@ -117,19 +117,19 @@
 
     if (backBtn) {
 
-      backBtn.addEventListener('click', function () {
+     backBtn.addEventListener('click', function () {
 
-        page19.classList.remove('show');
+  page19.classList.remove('show');
 
-        videoPage.style.display = 'block';
+  videoPage.classList.add('show');
 
-        birthdayVideo.currentTime = 0;
+  birthdayVideo.currentTime = 0;
 
-        birthdayVideo.play().catch(err => {
-          console.log('Video autoplay blocked:', err);
-        });
+  birthdayVideo.play().catch(err => {
+    console.log('Video autoplay blocked:', err);
+  });
 
-      });
+});
 
     }
 
@@ -137,13 +137,13 @@
 
     if (birthdayVideo) {
 
-      birthdayVideo.addEventListener('ended', function () {
+     birthdayVideo.addEventListener('ended', function () {
 
-        videoPage.style.display = 'none';
+  videoPage.classList.remove('show');
 
-        finalPage.classList.add('show');
+  finalPage.classList.add('show');
 
-      });
+});
 
     }
 
