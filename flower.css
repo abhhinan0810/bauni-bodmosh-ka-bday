@@ -850,7 +850,16 @@ body {
    ============================================================ */
 @media (max-width: 768px) {
   .flowers {
-    transform: scale(0.68) translateY(12vmin);
+    transform: scale(1.2) translateY(4vmin);
+    transform-origin: bottom center;
+  }
+
+  .flower--2 {
+    left: 20%;
+  }
+
+  .flower--3 {
+    right: 20%;
   }
   
   .happy-title {
@@ -875,7 +884,16 @@ body {
 
 @media (max-width: 480px) {
   .flowers {
-    transform: scale(0.55) translateY(18vmin);
+    transform: scale(1.65) translateY(7vmin);
+    transform-origin: bottom center;
+  }
+
+  .flower--2 {
+    left: 24%;
+  }
+
+  .flower--3 {
+    right: 24%;
   }
   
   .birthday-text-container {

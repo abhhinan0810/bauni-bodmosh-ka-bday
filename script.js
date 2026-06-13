@@ -102,10 +102,17 @@
 
     if (backBtn) {
       backBtn.addEventListener('click', function () {
+        // Prevent multiple clicks during the transition
+        page19.style.pointerEvents = 'none';
 
-        page19.classList.remove('show');
-
+        // Play the video and fade in the video page on top of page19
         showVideoPage();
+
+        // After the 800ms transition concludes, safely hide page19
+        setTimeout(() => {
+          page19.classList.remove('show');
+          page19.style.pointerEvents = '';
+        }, 800);
       });
     }
 
