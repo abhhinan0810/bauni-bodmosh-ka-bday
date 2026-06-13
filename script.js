@@ -9,7 +9,6 @@
   const backBtn       = document.getElementById('backBtn');
   const videoPage     = document.getElementById('videoPage');
   const birthdayVideo = document.getElementById('birthdayVideo');
-  const finalPage     = document.getElementById('finalPage');
 
   /* ══════════════════════════════════════════
      PAGE 1 — Escape button logic
@@ -116,7 +115,18 @@
 
         videoPage.classList.remove('show');
 
-        finalPage.classList.add('show');
+        window.location.href = 'flower.html';
+      });
+    }
+
+    const tempSkipBtn = document.getElementById('tempSkipBtn');
+    if (tempSkipBtn) {
+      tempSkipBtn.addEventListener('click', function () {
+        if (birthdayVideo) {
+          birthdayVideo.pause();
+        }
+        videoPage.classList.remove('show');
+        window.location.href = 'flower.html';
       });
     }
 
