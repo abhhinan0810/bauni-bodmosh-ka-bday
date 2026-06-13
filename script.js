@@ -276,9 +276,11 @@
         </svg>`
       ];
 
-      /* More flowers */
+      /* More flowers – fewer on mobile for perf */
+      const isMobile = window.innerWidth <= 768;
+      const flowerCount = isMobile ? 50 : 90;
 
-      for (let i = 0; i < 90; i++) {
+      for (let i = 0; i < flowerCount; i++) {
 
         const flower =
           document.createElement('div');
@@ -300,6 +302,14 @@
         const startY =
           Math.random() * 100;
 
+        const filterCSS = isMobile ? '' :
+          `filter:
+            blur(${Math.random()*0.7}px)
+            drop-shadow(
+              0 0 8px
+              rgba(255,180,210,.3)
+            );`;
+
         flower.style.cssText = `
           left:-100px;
           top:${startY}vh;
@@ -317,12 +327,7 @@
 
           z-index:${Math.random() > 0.7 ? 5 : 2};
 
-          filter:
-            blur(${Math.random()*0.7}px)
-            drop-shadow(
-              0 0 8px
-              rgba(255,180,210,.3)
-            );
+          ${filterCSS}
         `;
 
         petalContainer.appendChild(flower);
