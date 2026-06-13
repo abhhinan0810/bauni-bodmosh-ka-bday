@@ -183,6 +183,7 @@ body {
   align-items: center;
   animation: fadeInBirthday 2.5s ease forwards;
   opacity: 0;
+  margin-bottom: 80px; 
 }
 
 @keyframes fadeInBirthday {
@@ -523,4 +524,16 @@ body {
   .bottom-section {
     bottom: 24px;
   }
+}
+#videoPage {
+  /* change transition to handle opacity for fade */
+  transition: opacity 0.8s ease;
+}
+
+#videoPage.show {
+  display: flex;
+}
+
+#videoPage.visible {
+  opacity: 1;
 }
