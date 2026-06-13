@@ -278,7 +278,7 @@
 
       /* More flowers – fewer on mobile for perf */
       const isMobile = window.innerWidth <= 768;
-      const flowerCount = isMobile ? 90 : 90;
+      const flowerCount = isMobile ? 80 : 90;
 
       for (let i = 0; i < flowerCount; i++) {
 
